@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 0%;
+  --foreground: 0 0% 100%;
+  --card: 0 0% 0%;
+  --card-foreground: 0 0% 100%;
+  --popover: 0 0% 0%;
+  --popover-foreground: 0 0% 100%;
+  --primary: 0 0% 100%;
+  --primary-foreground: 0 0% 0%;
+  --secondary: 0 0% 10%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 0 0% 10%;
+  --muted-foreground: 0 0% 60%;
+  --accent: 0 0% 10%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 0 0% 10%;
+  --input: 0 0% 10%;
+  --ring: 0 0% 100%;
+}
+
+html,
+body {
+  background: black;
+  min-height: 100vh;
+  color: white;
+  overflow-x: hidden;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Optimize animations */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.animate-glow {
+  animation: glow 4s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 0px white;
+  }
+  to {
+    box-shadow: 0 0 20px white;
+  }
+}
+
+/* Ensure canvas is always visible and covers the entire page */
+canvas {
+  display: block !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: -1 !important;
+  pointer-events: none !important;
+}
+
+/* Add some space at the bottom of the page to ensure scrolling */
+main {
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
