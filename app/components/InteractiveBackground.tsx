@@ -39,8 +39,10 @@ const InteractiveBackground = () => {
         this.y = Math.random() * canvas.height
         this.originalY = this.y // Store original Y position
         this.size = Math.random() * 3 + 1
-        this.speedX = Math.random() * 1 - 0.5
-        this.speedY = Math.random() * 1 - 0.5
+        
+        // Increase speed range and ensure more varied movement
+        this.speedX = Math.random() * 2 - 1
+        this.speedY = Math.random() * 2 - 1
 
         // Cyan to purple color range
         const hue = Math.random() * 60 + 180
@@ -53,18 +55,32 @@ const InteractiveBackground = () => {
         this.x += this.speedX
         this.y += this.speedY
 
-        // Adjust particle position based on scroll
-        const visibleY = this.originalY - scrollY * 0.7 // Parallax effect
+        // Calculate visible position with reduced parallax effect
+        // This makes particles move more naturally with scroll
+        const visibleY = this.y - scrollY * 0.3 // Reduced parallax effect
 
-        // Mouse influence (subtle attraction)
+        // Mouse influence (enhanced attraction)
         const dx = mouseX - this.x
         const dy = mouseY - visibleY
         const distance = Math.sqrt(dx * dx + dy * dy)
 
-        if (distance < 100) {
-          this.speedX += dx * 0.0002
-          this.speedY += dy * 0.0002
+        if (distance < 150) { // Increased influence radius
+          this.speedX += dx * 0.0003
+          this.speedY += dy * 0.0003
         }
+
+        // Add slight gravity effect to make particles float more naturally
+        this.speedY += 0.01 * (Math.random() - 0.5)
+        
+        // Add some randomness to movement
+        if (Math.random() < 0.01) {
+          this.speedX += (Math.random() - 0.5) * 0.3
+          this.speedY += (Math.random() - 0.5) * 0.3
+        }
+        
+        // Dampen speed to prevent excessive movement
+        this.speedX *= 0.99
+        this.speedY *= 0.99
 
         // Boundary check with bounce
         if (this.x < 0 || this.x > canvas.width) {
@@ -78,14 +94,20 @@ const InteractiveBackground = () => {
       }
 
       draw(scrollY: number) {
-        // Calculate visible position based on scroll
-        const visibleY = this.y - scrollY * 0.7 // Parallax effect
+        // Calculate visible position with reduced parallax effect to match update method
+        const visibleY = this.y - scrollY * 0.3 // Reduced parallax effect
 
-        // Only draw if particle is within the viewport
-        if (visibleY > -100 && visibleY < window.innerHeight + 100) {
+        // Only draw if particle is within the viewport (extended range)
+        if (visibleY > -200 && visibleY < window.innerHeight + 200) {
           ctx!.beginPath()
           ctx!.arc(this.x, visibleY, this.size, 0, Math.PI * 2)
           ctx!.fillStyle = this.color
+          ctx!.fill()
+          
+          // Add subtle glow effect
+          ctx!.beginPath()
+          ctx!.arc(this.x, visibleY, this.size * 2, 0, Math.PI * 2)
+          ctx!.fillStyle = this.color.replace("${this.alpha}", `${this.alpha * 0.3}`)
           ctx!.fill()
         }
       }
@@ -93,7 +115,7 @@ const InteractiveBackground = () => {
 
     // Create particles
     const particles: Particle[] = []
-    const particleCount = 150
+    const particleCount = 200 // Increased particle count for better effect
 
     // Initialize particles
     const initParticles = () => {
@@ -119,15 +141,15 @@ const InteractiveBackground = () => {
       // Draw connections between particles
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
-          const visibleY1 = particles[i].y - scrollY * 0.7
-          const visibleY2 = particles[j].y - scrollY * 0.7
+          const visibleY1 = particles[i].y - scrollY * 0.3
+          const visibleY2 = particles[j].y - scrollY * 0.3
 
           // Only process if both particles are near the viewport
           if (
-            visibleY1 < -100 ||
-            visibleY1 > window.innerHeight + 100 ||
-            visibleY2 < -100 ||
-            visibleY2 > window.innerHeight + 100
+            visibleY1 < -200 ||
+            visibleY1 > window.innerHeight + 200 ||
+            visibleY2 < -200 ||
+            visibleY2 > window.innerHeight + 200
           ) {
             continue
           }

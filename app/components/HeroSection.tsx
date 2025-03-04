@@ -50,12 +50,12 @@ export default function HeroSection() {
 
   return (
     <section ref={containerRef} className="min-h-screen relative overflow-hidden">
-      <div className="absolute inset-0 overflow-hidden">
+      {/* <div className="absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-zinc-900/50 to-black"></div>
         {[...Array(50)].map((_, i) => (
           <FloatingParticle key={i} delay={i * 100} />
         ))}
-      </div>
+      </div> */}
 
       <motion.div style={{ y, opacity }} className="relative pt-32 pb-16 px-4">
         <div className="max-w-7xl mx-auto">
@@ -65,7 +65,7 @@ export default function HeroSection() {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h1 className="text-7xl md:text-8xl font-bold mb-6 tracking-tight relative">
+            <h1 className="mt-6 text-7xl md:text-8xl font-bold mb-6 tracking-tight relative">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-zinc-500">
                 Translate in Real-Time
               </span>

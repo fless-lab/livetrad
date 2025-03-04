@@ -141,7 +141,7 @@ export default function PricingSection() {
                           key={i}
                           className="flex items-start"
                           initial={{ opacity: 0, x: -20 }}
-                          animate={hoveredCard === index ? { opacity: 1, x: 0 } : {}}
+                          animate={{ opacity: 1, x: 0 }}
                           transition={{ duration: 0.3, delay: i * 0.05 }}
                         >
                           <Check className="h-5 w-5 text-white mr-2 shrink-0 mt-0.5" />
@@ -153,7 +153,7 @@ export default function PricingSection() {
                           key={i}
                           className="flex items-start text-zinc-500"
                           initial={{ opacity: 0, x: -20 }}
-                          animate={hoveredCard === index ? { opacity: 1, x: 0 } : {}}
+                          animate={{ opacity: 1, x: 0 }}
                           transition={{ duration: 0.3, delay: (option.features.length + i) * 0.05 }}
                         >
                           <X className="h-5 w-5 text-zinc-500 mr-2 shrink-0 mt-0.5" />
