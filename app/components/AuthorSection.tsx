@@ -21,15 +21,15 @@ interface AuthorSectionProps {
 }
 
 export default function AuthorSection({
-  email = "example@example.com", // Default email, replace with actual email
-  name = "John Doe",
-  role = "Creator of LiveTrad",
+  email = "achilleatarmla@gmail.com",
+  name = "Abdou-Raouf ATARMLA",
+  role = "Software & Machine Learning Engineer",
   bio = "Passionate about breaking language barriers with technology. LiveTrad is my solution to make real-time translation accessible to everyone.",
   socialLinks = {
     github: "https://github.com",
     twitter: "https://twitter.com",
     linkedin: "https://linkedin.com",
-    email: "mailto:example@example.com",
+    email: "mailto:achilleatarmla@gmail.com",
   },
 }: AuthorSectionProps) {
   const [gravatarUrl, setGravatarUrl] = useState("")
@@ -115,7 +115,7 @@ export default function AuthorSection({
                   <h4 className="text-xl font-semibold mb-4">The Story Behind LiveTrad</h4>
                   <p className="text-zinc-300 mb-4">{bio}</p>
                   <p className="text-zinc-300">
-                    With a background in natural language processing and a passion for connecting people across
+                    With a background in software engineering, self taught machine learning and a passion for connecting people across
                     cultures, I created LiveTrad to solve a real problem I encountered in international meetings and
                     conferences. The combination of a browser extension and desktop app provides a seamless experience
                     that works across all platforms and content types.
